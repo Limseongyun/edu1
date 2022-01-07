@@ -1,2 +1,9 @@
 server:
   port: 8888
+spring:  mvc:    view:      prefix: /WEB-INF/views/
+      suffix: .jsp
+  thymeleaf:
+    cache: false    prefix: classpath:/templates/
+    suffix: .html
+    view-names:    - thymeleaf/*
+logging:  level:    '[com.example.demo]': debug
