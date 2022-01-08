@@ -5,14 +5,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title><tiles:insertAttribute name="title"/></title>
-<tiles:insertAttribute name="css"/>
+	<meta charset="EUC-KR">
+	<title>
+		<tiles:insertAttribute name="title"/>
+	</title>
+	<tiles:insertAttribute name="css"/>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<tiles:insertAttribute name="header"/>
-<tiles:insertAttribute name="body"/>
-<tiles:insertAttribute name="footer"/>
-<tiles:insertAttribute name="script"/>
+	<tiles:insertAttribute name="nav"/>
+	<tiles:insertAttribute name="side"/>
+	<tiles:insertAttribute name="body"/>
+	<tiles:insertAttribute name="footer"/>
+	<tiles:insertAttribute name="script"/>
 </body>
 </html>

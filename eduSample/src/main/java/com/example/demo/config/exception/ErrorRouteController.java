@@ -24,5 +24,4 @@ public class ErrorRouteController implements ErrorController {
 		if(exMsg != null) md.addAttribute("exMsg", exMsg.toString());
 		return "error/ErrorPage";
 	}
-
 }

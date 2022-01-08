@@ -3,16 +3,34 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-	<definition name="defaultLayout" template="/WEB-INF/views/layout/layout.jsp">
+	<!-- 디폴트 레이아웃 -->
+	<definition name="defaultLayout" template="/WEB-INF/views/layout/defaultLayout.jsp">
 		<put-attribute name="title" value="EDU" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="header" value="/WEB-INF/views/layoutPart/header.jsp" />
 		<put-attribute name="css" value="/WEB-INF/views/layoutPart/css.jsp" />
-		<!-- <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" /> -->
+		<put-attribute name="nav" value="/WEB-INF/views/layoutPart/nav.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/layoutPart/side.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/layoutPart/footer.jsp" />
 		<put-attribute name="script" value="/WEB-INF/views/layoutPart/script.jsp" />
 	</definition>
 	<definition name="pages/*" extends="defaultLayout">
 		<put-attribute name="body" value="/WEB-INF/views/pages/{1}.jsp" />
 	</definition>
+	
+	<!-- 에러 레이아웃 TODO: 사이드메뉴 유지? -->
+	<definition name="errorLayout" template="/WEB-INF/views/layout/errorLayout.jsp"/>
+	<definition name="error/errorPage" extends="errorLayout">
+		<put-attribute name="body" value="/WEB-INF/views/error/errorPage.jsp" />
+	</definition>
+	
+	<!-- 로그인/회원가입 레이아웃 -->
+	<definition name="loginLayout" template="/WEB-INF/views/layout/loginLayout.jsp"/>
+	<definition name="pages/loginPage" extends="loginLayout">
+		<put-attribute name="body" value="/WEB-INF/views/pages/loginPage.jsp" />
+	</definition>
+	<definition name="pages/registerPage" extends="loginLayout">
+		<put-attribute name="body" value="/WEB-INF/views/pages/registerPage.jsp" />
+	</definition>
+	
+
 </tiles-definitions>
