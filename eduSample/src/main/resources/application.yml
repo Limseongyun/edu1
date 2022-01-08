@@ -1,8 +1,7 @@
 server:
   port: 8888
 spring:
-  web:    resources:      add-mappings: false  mvc:
-    throw-exception-if-no-handler-found: true    view:      prefix: /WEB-INF/views/
+  web:    resources:      add-mappings: false  mvc:    view:      prefix: /WEB-INF/views/
       suffix: .jsp
   thymeleaf:
     cache: false    prefix: classpath:/templates/

@@ -4,11 +4,13 @@
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 	<definition name="defaultLayout" template="/WEB-INF/views/layout/layout.jsp">
-		<put-attribute name="title" value="" />
-		<put-attribute name="header" value="/WEB-INF/views/layoutPart/header.jsp" />
-		<!-- <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" /> -->
+		<put-attribute name="title" value="EDU" />
 		<put-attribute name="body" value="" />
+		<put-attribute name="header" value="/WEB-INF/views/layoutPart/header.jsp" />
+		<put-attribute name="css" value="/WEB-INF/views/layoutPart/css.jsp" />
+		<!-- <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" /> -->
 		<put-attribute name="footer" value="/WEB-INF/views/layoutPart/footer.jsp" />
+		<put-attribute name="script" value="/WEB-INF/views/layoutPart/script.jsp" />
 	</definition>
 	<definition name="pages/*" extends="defaultLayout">
 		<put-attribute name="body" value="/WEB-INF/views/pages/{1}.jsp" />

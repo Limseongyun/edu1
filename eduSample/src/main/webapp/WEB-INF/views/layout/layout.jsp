@@ -6,11 +6,13 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title><tiles:insertAttribute name="title"/></title>
+<tiles:insertAttribute name="css"/>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 <tiles:insertAttribute name="header"/>
 <tiles:insertAttribute name="body"/>
 <tiles:insertAttribute name="footer"/>
+<tiles:insertAttribute name="script"/>
 </body>
 </html>
