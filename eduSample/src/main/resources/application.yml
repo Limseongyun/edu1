@@ -1,6 +1,11 @@
+#디폴트값, profiles 환경 선택
 server:
   port: 8888
 spring:
+  profiles:    group:      "local": "local"
+      "dev": "dev"
+      "prd": "prd"
+    active:    - local
   web:    resources:      add-mappings: false  mvc:    view:      prefix: /WEB-INF/views/
       suffix: .jsp
   thymeleaf:
@@ -8,3 +13,47 @@ spring:
     suffix: .html
     view-names:    - thymeleaf/*
 logging:  level:    '[com.example.demo]': debug
+##########
+---
+#local
+spring:  config:    activate:      on-profile:      - local
+  datasource:    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/edudb
+    username: edu
+    password: edu
+  jpa:    hibernate:      ddl-auto: none
+    show-sql: true
+##########
+---
+#dev TODO 언제가는
+spring:
+  config:
+    activate:
+      on-profile:
+      - dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/edudb
+    username: edu
+    password: edu
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+##########
+---
+#prd TODO 언젠간?
+spring:
+  config:
+    activate:
+      on-profile:
+      - prd
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/edudb
+    username: edu
+    password: edu
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
