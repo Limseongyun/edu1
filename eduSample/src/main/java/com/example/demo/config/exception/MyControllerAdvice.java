@@ -1,22 +1,26 @@
 package com.example.demo.config.exception;
 
+import javax.servlet.ServletException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import lombok.extern.slf4j.Slf4j;
 
-@ControllerAdvice
+//@ControllerAdvice
 @Slf4j
 public class MyControllerAdvice {
 	@ExceptionHandler(Exception.class)
-	public String notFound(Exception e, Model model) {
+	public String err1(Exception e, Model model) {
 		log.debug("hi1 {}", e.getMessage());
-		model.addAttribute("msg", e.getMessage());
-		return "/error/ErrorPage";
+		log.debug("hi1 {}", e.getClass().toString());
+		model.addAttribute("msg", e.getClass().toString());
+		return "error/ErrorPage";
 	}
 	
 	@ExceptionHandler(NoHandlerFoundException.class)
@@ -24,7 +28,14 @@ public class MyControllerAdvice {
 	public String notFound2(Exception e, Model model) {
 		log.debug("hi2 {}", e.getMessage());
 		model.addAttribute("msg", e.getMessage());
-		return "/error/ErrorPage";
+		return "error/ErrorPage";
 	}
+//	@ExceptionHandler(Exception.class)
+//	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+//	public String notFound3(Exception e, Model model) {
+//		log.debug("hi2 {}", e.getMessage());
+//		model.addAttribute("msg", e.getMessage());
+//		return "error/ErrorPage";
+//	}
 
 }

@@ -11,14 +11,19 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class SampleController {
-	@UseThymeleaf
 	@GetMapping("/sample1")
 	public String smaple() {
-		return "sample";
+		return "pages/samplePage";
 	}
 	
 	@RequestMapping("/sample2")
 	public String smaple2() {
-		return "sample";
+		int a = 1/0;
+		return "test/haha";
+	}
+	
+	@RequestMapping("/sample3")
+	public String smaple3() {
+		return "test/hah2a";
 	}
 }
