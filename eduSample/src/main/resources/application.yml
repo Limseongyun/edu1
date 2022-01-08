@@ -13,6 +13,7 @@ spring:
     suffix: .html
     view-names:    - thymeleaf/*
 logging:  level:    '[com.example.demo]': debug
+mybatis:  mapper-locations:  - classpath:mapper/**/*.xml
 ##########
 ---
 #local
