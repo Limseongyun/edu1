@@ -36,4 +36,9 @@ public class SampleController {
 	public String register() {
 		return "pages/registerPage";
 	}
+	
+	@GetMapping("/index")
+	public String index() {
+		return "pages/indexPage";
+	}
 }
