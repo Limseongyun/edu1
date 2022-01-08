@@ -33,7 +33,7 @@
 <!-- AdminLTE App -->
 <script src="/webjars/AdminLTE/3.1.0/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/webjars/AdminLTE/3.1.0/dist/js/demo.js"></script>
+<!-- <script src="/webjars/AdminLTE/3.1.0/dist/js/demo.js"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/webjars/AdminLTE/3.1.0/dist/js/pages/dashboard.js"></script>
+<!-- <script src="/webjars/AdminLTE/3.1.0/dist/js/pages/dashboard.js"></script> -->
 </html>

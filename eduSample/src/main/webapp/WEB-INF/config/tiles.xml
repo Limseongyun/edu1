@@ -31,6 +31,4 @@
 	<definition name="pages/registerPage" extends="loginLayout">
 		<put-attribute name="body" value="/WEB-INF/views/pages/registerPage.jsp" />
 	</definition>
-	
-
 </tiles-definitions>
