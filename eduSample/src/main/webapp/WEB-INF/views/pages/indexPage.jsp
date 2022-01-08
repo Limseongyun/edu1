@@ -3,20 +3,9 @@
 <!DOCTYPE html>
 <html>
 <div class="content-wrapper">
-	<div class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0">¿Œµ¶Ω∫</h1>
-				</div><!-- /.col -->
-				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-					</ol>
-				</div><!-- /.col -->
-			</div><!-- /.row -->
-		</div><!-- /.container-fluid -->
-	</div>
+	<jsp:include page="/WEB-INF/views/parts/bodyHeaderPart.jsp">
+		<jsp:param value="¿Œµ¶Ω∫" name="menuNm"/>
+	</jsp:include>
 
 	<section class="content">
 		<div class="container-fluid">
