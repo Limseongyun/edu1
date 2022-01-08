@@ -15,16 +15,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/webjars/**", "/files/**", "/swagger-ui/**");
 	}
 	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		//접근가능페이지설정
-		//로그인위치 설정
-		//로그아웃설정
-		//액세스디나이페이지설정
-	}
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.
+//		//접근가능페이지설정
+//		//로그인위치 설정
+//		//로그아웃설정
+//		//액세스디나이페이지설정
+//	}
 }
