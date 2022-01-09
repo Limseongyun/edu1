@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,6 +26,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tb_user")
+@DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 public class User extends Base implements UserDetails {
 	private static final long serialVersionUID = 1L;
@@ -37,7 +39,7 @@ public class User extends Base implements UserDetails {
 	@Column(name = "user_nm")
 	private String userNm;
 	
-	@Column(name = "user_id")
+	@Column(name = "user_id", unique = true)
 	private String userId;
 	
 	@Column(name = "user_pw")
