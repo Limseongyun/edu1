@@ -25,6 +25,7 @@ public class MyRestControllerAdvice {
 		} else {
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
+		//ex.printStackTrace();
 		return RVO.builder().code("9999").msg("오류가 발생했 습니다.").data(ex.getMessage()).build();
 	}
 }

@@ -8,6 +8,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -17,7 +18,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,11 +28,12 @@ import lombok.Setter;
 @Table(name = "tb_user")
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
+@SequenceGenerator(initialValue = 1, allocationSize = 1, name = "tb_user_seq", sequenceName = "tb_user_seq")
 public class User extends Base implements UserDetails {
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_user_seq")
 	@Column(name = "user_sn")
 	private Long userSn;
 	

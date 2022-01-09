@@ -42,6 +42,14 @@ public class InitializerConfig {
 			adm.setUserTyCode("01");
 			adm.setUserSttusCode("01");
 			userRepo.save(adm);
+			
+			User adm2 = new User();
+			adm2.setUserId("admin2");
+			adm2.setUserNm("¾îµå¹Î2");
+			adm2.setUserPw(pe.encode("admin2"));
+			adm2.setUserTyCode("01");
+			adm2.setUserSttusCode("01");
+			userRepo.save(adm2);
 		}
 		
 		List<CmmnCodeDetail> roleTyCode = ccdRepo.findByCodeId(ROLE_TY_CODE);

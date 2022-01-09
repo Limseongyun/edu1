@@ -1,5 +1,6 @@
 package com.example.demo.api.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,17 +8,29 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.config.RVO;
 import com.example.demo.config.security.JwtTokenProvider;
+import com.example.demo.model.dto.UserJoinDto;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.repo.UserRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class AuthSampleService {
-	@Autowired UserRepo userRepo;
-	@Autowired PasswordEncoder pe;
+	@Autowired private UserRepo userRepo;
+	@Autowired private PasswordEncoder pe;
 	
 	//가입
-	public void userJoin() {
-		
+	public RVO<User> userJoin(UserJoinDto dto) {
+		if(dto.getUserId() != null 
+				&& userRepo.findByUserId(dto.getUserId()) != null) throw new RuntimeException("이미 존재하는 유저 입니다.");
+		ModelMapper mm = new ModelMapper();
+		User user = mm.map(dto, User.class);
+		user.setUserPw(pe.encode(user.getPassword()));
+		user.setUserSttusCode("01");
+		user.setUserTyCode("01");
+		User joinedUsr = userRepo.save(user);
+		return RVO.<User>builder().msg("가입되었습니다.").data(joinedUsr).code("0000").build();
 	}
 	
 	//탈퇴
