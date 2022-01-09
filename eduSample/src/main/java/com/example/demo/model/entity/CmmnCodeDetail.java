@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import groovy.transform.builder.Builder;
@@ -18,6 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@DynamicInsert
 @Table(name = "tb_cmmn_code_detail")
 @EntityListeners(AuditingEntityListener.class)
 public class CmmnCodeDetail extends BaseTime{
