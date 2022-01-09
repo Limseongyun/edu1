@@ -29,12 +29,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 				String userSn = JwtTokenProvider.getUserSnFromJwt(jwt);
 				
 				Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
-				roles.add(new SimpleGrantedAuthority("ROLE_USER"));
+				//roles.add(new SimpleGrantedAuthority("ROLE_USER"));
 				//TODO ROLE
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userSn, null, roles);
 				//TODO ?
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-				
+				//authentication.setAuthenticated(true);
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			} else {
 				//if(jwt == null) request.setAttribute("unauthorization", "인증키 없음");
