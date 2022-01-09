@@ -10,7 +10,7 @@ import com.example.demo.config.security.JwtTokenProvider;
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthSampleRestController {
-	@GetMapping("/getToken")
+	@GetMapping("/token")
 	public String getToken() {
 		return JwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken("a",null));
 	}

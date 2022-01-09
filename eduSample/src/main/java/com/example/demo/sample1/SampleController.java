@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class SampleController {
-	@GetMapping("/sample1")
+	@GetMapping("/public/sample1")
 	public String smaple() {
 		return "pages/samplePage";
 	}
@@ -37,7 +37,7 @@ public class SampleController {
 		return "pages/registerPage";
 	}
 	
-	@GetMapping("/index")
+	@GetMapping("/public/index")
 	public String index() {
 		return "pages/indexPage";
 	}

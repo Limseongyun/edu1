@@ -8,5 +8,23 @@ import com.example.demo.model.repo.UserRepo;
 @Service
 public class AuthSampleService {
 	@Autowired UserRepo userRepo;
-
+	
+	//°¡ÀÔ
+	public void userJoin() {
+		
+	}
+	
+	//Å»Åð
+	public void userResign() {
+		
+	}
+	
+	//LOGIN
+	public void getToken() {
+		
+	}
+	
+	private void userIsValid() {
+		
+	}
 }

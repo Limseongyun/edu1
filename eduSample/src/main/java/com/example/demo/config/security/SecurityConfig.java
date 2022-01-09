@@ -3,7 +3,6 @@ package com.example.demo.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -38,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.and()
 			.authorizeRequests()
 				.antMatchers("/swagger-ui/**", "/v3/api-docs/**",//Swagger 허용
-							 "/api/*/auth/**").permitAll() //auth로 시작하명 허용
+							 "/api/*/auth/**", //auth로 시작하명 허용
+							 "/public/**").permitAll() //public 으로 시작하면 허용, 화면단
 				.antMatchers("/**").authenticated()
 				.and()
 			.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
