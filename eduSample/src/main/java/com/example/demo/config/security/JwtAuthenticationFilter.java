@@ -22,10 +22,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		log.debug("[JwtAuthenticationFilter]{}, {}", request.getRequestURI(), request.getHeader("Authorization"));
+		//log.debug("[JwtAuthenticationFilter]{}, {}", request.getRequestURI(), request.getHeader("Authorization"));
 		try {
 			String jwt = getJwtFromRequest(request);
-			if(! jwt.isEmpty() && JwtTokenProvider.validateToken(jwt)) {
+			if(jwt != null && JwtTokenProvider.validateToken(jwt)) {
 				String userSn = JwtTokenProvider.getUserSnFromJwt(jwt);
 				
 				Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
@@ -37,8 +37,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 				
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			} else {
-				if(! jwt.isEmpty()) request.setAttribute("unauthorization", "인증키 없음");
-				if(! JwtTokenProvider.validateToken(jwt)) request.setAttribute("unauthorization", "인증키 만료");
+				//if(jwt == null) request.setAttribute("unauthorization", "인증키 없음");
+				//if(JwtTokenProvider.validateToken(jwt)) request.setAttribute("unauthorization", "인증키 만료");
 			}
 		} catch (Exception e) {
 			log.debug("유저정보를 securityContext에 넣는데 실패함, {}", e.getMessage());
@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 	
 	private String getJwtFromRequest(HttpServletRequest req) {
 		String bearerToken = req.getHeader("Authorization");
-		if(! bearerToken.isEmpty() && bearerToken.startsWith("Bearer ")) {
+		if(bearerToken != null && bearerToken.startsWith("Bearer ")) {
 			return bearerToken.substring("Bearer ".length());
 		}
 		return null;

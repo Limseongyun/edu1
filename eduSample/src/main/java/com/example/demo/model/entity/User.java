@@ -17,11 +17,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import groovy.transform.builder.Builder;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-@Builder
+//@Builder
 @Getter
 @Setter
 @Entity
