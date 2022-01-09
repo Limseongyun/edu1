@@ -26,7 +26,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "tb_user")
 @EntityListeners(AuditingEntityListener.class)
-public class User implements UserDetails{
+public class User extends Base implements UserDetails {
 	/**
 	 * 
 	 */
