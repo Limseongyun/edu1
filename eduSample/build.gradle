@@ -29,6 +29,7 @@ dependencies {
 	implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.1'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.4'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.0.0'
