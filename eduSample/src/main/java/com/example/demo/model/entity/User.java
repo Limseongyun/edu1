@@ -44,6 +44,12 @@ public class User extends Base implements UserDetails {
 	
 	@Column(name = "user_pw")
 	private String userPw;
+	
+	@Column(name = "user_sttus_code")
+	private String userSttusCode;
+	
+	@Column(name = "user_ty_code")
+	private String userTyCode;
 
 	//USER Detail Impl ----------------
 	@Transient

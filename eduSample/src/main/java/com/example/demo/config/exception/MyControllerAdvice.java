@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import lombok.extern.slf4j.Slf4j;
 
-@ControllerAdvice
+//@ControllerAdvice
 @Slf4j
 //@Deprecated
 public class MyControllerAdvice {
