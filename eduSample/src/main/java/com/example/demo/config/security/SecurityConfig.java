@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.authorizeRequests()
 				.antMatchers("/swagger-ui/**", "/v3/api-docs/**",//Swagger 허용
 							 "/api/*/auth/**", //auth로 시작하명 허용
-							 "/public/**").permitAll() //public 으로 시작하면 허용, 화면단
+							 "/public/**", "/favicon*").permitAll() //public 으로 시작하면 허용, 화면단
 				.antMatchers("/**").authenticated()
 				.and()
 			.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
