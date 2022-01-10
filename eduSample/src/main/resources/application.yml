@@ -23,7 +23,9 @@ spring:  config:    activate:      on-profile:      - local
     url: jdbc:postgresql://localhost:5432/edudb
     username: edu
     password: edu
-  jpa:    hibernate:      ddl-auto: create
+  jpa:
+    properties:      hibernate:
+        format_sql: true    hibernate:      ddl-auto: create
     show-sql: true
 ##########
 ---
