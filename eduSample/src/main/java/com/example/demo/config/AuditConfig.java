@@ -1,18 +1,12 @@
 package com.example.demo.config;
 
 import java.util.Optional;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.example.demo.model.entity.User;
-
-import lombok.extern.slf4j.Slf4j;
-
 @Configuration
-@Slf4j
 public class AuditConfig implements AuditorAware<Long>{
 	@Override
 	public Optional<Long> getCurrentAuditor() {
