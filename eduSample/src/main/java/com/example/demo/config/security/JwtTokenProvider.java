@@ -41,15 +41,17 @@ public class JwtTokenProvider {
 			return true;
 		} catch (SignatureException ex) {
 			log.error("Invalid JWT signature");
+			throw new RuntimeException("유효하지 않은 JWT 사인 입니다.");
 		} catch (MalformedJwtException ex) {
 			log.error("Invalid JWT token");
+			throw new RuntimeException("유효하지 않은 JWT 입니다.");
 		} catch (ExpiredJwtException ex) {
 			log.error("Expired JWT token");
+			throw new RuntimeException("토큰이 만료되었습니다.");
 		} catch (UnsupportedJwtException ex) {
-			log.error("Unsupported JWT token");
+			throw new RuntimeException("지원하지 않는 JWT 입니다.");
 		} catch (IllegalArgumentException ex) {
-			log.error("JWT claims string is empty.");
+			throw new RuntimeException("JWT 의 claim이 비었습니다.");
 		}
-		return false;
 	}
 }

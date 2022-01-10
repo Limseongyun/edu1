@@ -1,6 +1,8 @@
 package com.example.demo.config.code;
 
 public interface Code {
+	String ANNONYMOUSE_USER = "anonymousUser";
+	
 	String USER_TY_MNG = "01";
 	String USER_TY_USR = "02";
 	

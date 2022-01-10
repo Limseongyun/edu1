@@ -3,6 +3,7 @@ package com.example.demo.api.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -74,5 +75,21 @@ public class AuthSampleService {
 		} else {
 			return false;
 		}
+	}
+	
+	public RVO<User> reSign(){
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		if(name == null || Code.ANNONYMOUSE_USER.equals(name)) throw new RuntimeException("Å»Åð´Â ·Î±×ÀÎÀ» ÇØ¾ß ÇÕ´Ï´Ù.");
+		log.debug("name is {}", name);
+		User user = userRepo.findById(Long.parseLong(name)).get();
+		if(user.getUserTyCode().equals(Code.ROLE_TY_ADM)) throw new RuntimeException("¾îµå¹ÎÀº Å»ÅðÇÒ¼ö ¾ø½À´Ï´Ù.");
+		if(user.getUserSttusCode().equals(Code.USER_STTUS_RESIGN)) throw new RuntimeException("ÀÌ¹Ì Å»ÅðµÈ È¸¿øÀÔ´Ï´Ù.");
+		user.setUserSttusCode(Code.USER_STTUS_RESIGN);
+		User reSignUser = userRepo.save(user);
+		return RVO.<User>builder()
+				.code(ApiCode.NORMAL)
+				.msg("Å»ÅðµÇ¾ú½À´Ï´Ù.")
+				.data(reSignUser)
+				.build();
 	}
 }

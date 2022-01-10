@@ -13,10 +13,6 @@ import com.example.demo.model.dto.UserJoinDto;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.repo.UserRepo;
 
-import lombok.extern.slf4j.Slf4j;
-
-
-@Slf4j
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthSampleRestController {
@@ -30,12 +26,17 @@ public class AuthSampleRestController {
 	}
 	
 	@PostMapping("/userJoin")
-	public RVO<User> userJoin(@RequestBody UserJoinDto dto) {		
+	public RVO<User> userJoin(@RequestBody UserJoinDto dto) {
 		return asService.userJoin(dto);
 	}
 	
 	@PostMapping("/mngJoin")
-	public RVO<User> mngJoin(@RequestBody UserJoinDto dto) {		
+	public RVO<User> mngJoin(@RequestBody UserJoinDto dto) {
 		return asService.userJoin(dto);
+	}
+	
+	@PostMapping("/reSign")
+	public RVO<User> reSign() {		
+		return asService.reSign();
 	}
 }
