@@ -21,7 +21,6 @@ public class AuthSampleRestController {
 	
 	@GetMapping("/token")
 	public RVO<String> getToken(@RequestParam String userId, @RequestParam String userPw) {
-		//return JwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken("a",null));
 		return asService.getToken(userId, userPw);
 	}
 	
@@ -36,7 +35,7 @@ public class AuthSampleRestController {
 	}
 	
 	@PostMapping("/reSign")
-	public RVO<User> reSign() {		
+	public RVO<User> reSign() {
 		return asService.reSign();
 	}
 }
