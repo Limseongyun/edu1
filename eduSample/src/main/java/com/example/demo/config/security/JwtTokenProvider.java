@@ -1,6 +1,8 @@
 package com.example.demo.config.security;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.core.Authentication;
 
 import io.jsonwebtoken.Claims;
@@ -36,22 +38,38 @@ public class JwtTokenProvider {
 	}
 	
 	public static boolean validateToken(String token) {
+		return validateTokenSub(token, null);
+	}
+	
+	public static boolean validateToken(String token, HttpServletRequest req) {
+		return validateTokenSub(token, req);
+	}
+	
+	private static boolean validateTokenSub(String token, HttpServletRequest req) {
 		try {
 			Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
 			return true;
 		} catch (SignatureException ex) {
-			log.error("Invalid JWT signature");
-			throw new RuntimeException("유효하지 않은 JWT 사인 입니다.");
+			String err = "유효하지 않은 JWT 사인 입니다.";
+			log.error(err);
+			if(req != null) req.setAttribute("unauthorization", err);
 		} catch (MalformedJwtException ex) {
-			log.error("Invalid JWT token");
-			throw new RuntimeException("유효하지 않은 JWT 입니다.");
+			String err = "잘못된 JWT 입니다.";
+			log.error(err);
+			if(req != null) req.setAttribute("unauthorization", err);
 		} catch (ExpiredJwtException ex) {
-			log.error("Expired JWT token");
-			throw new RuntimeException("토큰이 만료되었습니다.");
+			String err = "토큰이 만료되었습니다.";
+			log.error(err);
+			if(req != null) req.setAttribute("unauthorization", err);
 		} catch (UnsupportedJwtException ex) {
-			throw new RuntimeException("지원하지 않는 JWT 입니다.");
+			String err = "지원하지 않는 JWT 입니다.";
+			log.error(err);
+			if(req != null) req.setAttribute("unauthorization", err);
 		} catch (IllegalArgumentException ex) {
-			throw new RuntimeException("JWT 의 claim이 비었습니다.");
+			String err = "JWT 의 claim이 비었습니다.";
+			log.error(err);
+			if(req != null) req.setAttribute("unauthorization", err);
 		}
+		return false;
 	}
 }

@@ -23,9 +23,10 @@ public class JwtUnAuthenticationEntryPoint implements AuthenticationEntryPoint{
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
 		log.debug("[JwtAuthenticationEntryPoint]! err: {}, {}", authException.getMessage(), request.getRequestURI());
+		String msg = String.valueOf(request.getAttribute("unauthorization"));
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.setContentType("application/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.print(new Gson().toJson(RVO.builder().msg("인증에 실패하였습니다.").data(authException.getMessage()).code(ApiCode.NOT_AUTH).build()));
+		out.print(new Gson().toJson(RVO.builder().msg("인증에 실패하였습니다.").data(msg != null ? msg : authException.getMessage()).code(ApiCode.NOT_AUTH).build()));
 	}
 }

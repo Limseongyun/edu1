@@ -24,7 +24,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 		//log.debug("[JwtAuthenticationFilter]{}, {}", request.getRequestURI(), request.getHeader("Authorization"));
 		try {
 			String jwt = getJwtFromRequest(request);
-			if(jwt != null && JwtTokenProvider.validateToken(jwt)) {
+			if(jwt != null && JwtTokenProvider.validateToken(jwt, request)) {
 				String userSn = JwtTokenProvider.getUserSnFromJwt(jwt);
 				
 				Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
@@ -37,7 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			} else {
 				//if(jwt == null) request.setAttribute("unauthorization", "인증키 없음");
-				//if(JwtTokenProvider.validateToken(jwt)) request.setAttribute("unauthorization", "인증키 만료");
+				//if(! JwtTokenProvider.validateToken(jwt)) request.setAttribute("unauthorization", "인증키 만료");
 			}
 		} catch (Exception e) {
 			log.debug("유저정보를 securityContext에 넣는데 실패함, {}", e.getMessage());
