@@ -11,6 +11,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.config.RVO;
+import com.example.demo.config.code.ApiCode;
 import com.google.gson.Gson;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,6 @@ public class JwtUnAuthenticationEntryPoint implements AuthenticationEntryPoint{
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.setContentType("application/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.print(new Gson().toJson(RVO.builder().msg("인증에 실패하였습니다.").data(authException.getMessage()).code("9999").build()));
+		out.print(new Gson().toJson(RVO.builder().msg("인증에 실패하였습니다.").data(authException.getMessage()).code(ApiCode.NOT_AUTH).build()));
 	}
 }

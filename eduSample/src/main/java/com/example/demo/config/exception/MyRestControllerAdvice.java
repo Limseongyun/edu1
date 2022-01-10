@@ -1,22 +1,17 @@
 package com.example.demo.config.exception;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.example.demo.config.RVO;
+import com.example.demo.config.code.ApiCode;
 
-import lombok.extern.slf4j.Slf4j;
-@Slf4j
 @RestControllerAdvice
 public class MyRestControllerAdvice {
 	@ExceptionHandler(Exception.class)
-	public RVO err(Exception ex, HttpServletResponse resp, HttpServletRequest req) {
+	public RVO<String> err(Exception ex, HttpServletResponse resp, HttpServletRequest req) {
 		//Object errCode = req.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		//log.debug("{}, {}, {}", req, resp, errCode);
 		if(ex instanceof RuntimeException) {
@@ -26,6 +21,6 @@ public class MyRestControllerAdvice {
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 		//ex.printStackTrace();
-		return RVO.builder().code("9999").msg("오류가 발생했 습니다.").data(ex.getMessage()).build();
+		return RVO.<String>builder().code(ApiCode.DEFAULT_ERR).msg("오류가 발생했 습니다.").data(ex.getMessage()).build();
 	}
 }

@@ -7,6 +7,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.config.RVO;
+import com.example.demo.config.code.ApiCode;
+import com.example.demo.config.code.Code;
 import com.example.demo.config.security.JwtTokenProvider;
 import com.example.demo.model.dto.UserJoinDto;
 import com.example.demo.model.entity.User;
@@ -22,15 +24,24 @@ public class AuthSampleService {
 	
 	//가입
 	public RVO<User> userJoin(UserJoinDto dto) {
+		return joinCmmn(dto, Code.ROLE_TY_USR);
+	}
+	
+	//관리자 가입
+	public RVO<User> mngJoin(UserJoinDto dto) {
+		return joinCmmn(dto, Code.ROLE_TY_MNG);
+	}
+	
+	private RVO<User> joinCmmn(UserJoinDto dto, String userTyCode) {
 		if(dto.getUserId() != null 
 				&& userRepo.findByUserId(dto.getUserId()) != null) throw new RuntimeException("이미 존재하는 유저 입니다.");
 		ModelMapper mm = new ModelMapper();
 		User user = mm.map(dto, User.class);
 		user.setUserPw(pe.encode(user.getPassword()));
-		user.setUserSttusCode("01");
-		user.setUserTyCode("01");
+		user.setUserSttusCode(Code.USER_STTUS_OK);
+		user.setUserTyCode(userTyCode);
 		User joinedUsr = userRepo.save(user);
-		return RVO.<User>builder().msg("가입되었습니다.").data(joinedUsr).code("0000").build();
+		return RVO.<User>builder().msg("가입되었습니다.").data(joinedUsr).code(ApiCode.NORMAL).build();
 	}
 	
 	//탈퇴
@@ -46,7 +57,7 @@ public class AuthSampleService {
 				if(!userIsValid(user)) throw new RuntimeException("유저 상태가 정상이 아닙니다.");
 				return RVO.<String>builder()
 						.msg("jwt 토큰이 발급되었습니다.")
-						.code("0000")
+						.code(ApiCode.NORMAL)
 						.data(JwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(String.valueOf(user.getUserSn()), null)))//TODO:ROLE
 						.build();
 			} else {

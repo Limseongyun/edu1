@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.example.demo.config.code.Code;
 import com.example.demo.model.entity.CmmnCodeDetail;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.repo.CmmnCodeDetailRepo;
@@ -39,16 +40,16 @@ public class InitializerConfig {
 			adm.setUserId("admin");
 			adm.setUserNm("¾îµå¹Î");
 			adm.setUserPw(pe.encode("admin"));
-			adm.setUserTyCode("01");
-			adm.setUserSttusCode("01");
+			adm.setUserTyCode(Code.USER_TY_MNG);
+			adm.setUserSttusCode(Code.USER_STTUS_OK);
 			userRepo.save(adm);
 			
 			User adm2 = new User();
 			adm2.setUserId("admin2");
 			adm2.setUserNm("¾îµå¹Î2");
 			adm2.setUserPw(pe.encode("admin2"));
-			adm2.setUserTyCode("01");
-			adm2.setUserSttusCode("01");
+			adm2.setUserTyCode(Code.USER_TY_MNG);
+			adm2.setUserSttusCode(Code.USER_STTUS_OK);
 			userRepo.save(adm2);
 		}
 		
@@ -57,17 +58,17 @@ public class InitializerConfig {
 			log.debug("cmmncode insert!");
 			CmmnCodeDetail adm = new CmmnCodeDetail();
 			adm.setCodeId(ROLE_TY_CODE);
-			adm.setCodeValue("01");
+			adm.setCodeValue(Code.ROLE_TY_ADM);
 			adm.setCodeValueNm("¾îµå¹Î");
 			
 			CmmnCodeDetail mng = new CmmnCodeDetail();
 			mng.setCodeId(ROLE_TY_CODE);
-			mng.setCodeValue("02");
+			mng.setCodeValue(Code.ROLE_TY_MNG);
 			mng.setCodeValueNm("°ü¸®ÀÚ");
 			
 			CmmnCodeDetail usr = new CmmnCodeDetail();
 			usr.setCodeId(ROLE_TY_CODE);
-			usr.setCodeValue("03");
+			usr.setCodeValue(Code.ROLE_TY_USR);
 			usr.setCodeValueNm("»ç¿ëÀÚ");
 			
 			ccdRepo.save(adm);
@@ -79,12 +80,12 @@ public class InitializerConfig {
 		if(userTyCode.size() == 0) {
 			CmmnCodeDetail mng = new CmmnCodeDetail();
 			mng.setCodeId(USER_TY_CODE);
-			mng.setCodeValue("01");
+			mng.setCodeValue(Code.USER_TY_MNG);
 			mng.setCodeValueNm("°ü¸®ÀÚ");
 			
 			CmmnCodeDetail usr = new CmmnCodeDetail();
 			usr.setCodeId(USER_TY_CODE);
-			usr.setCodeValue("02");
+			usr.setCodeValue(Code.USER_TY_USR);
 			usr.setCodeValueNm("°í°´");
 			
 			ccdRepo.save(mng);
@@ -95,12 +96,12 @@ public class InitializerConfig {
 		if(userSttusCode.size() == 0) {
 			CmmnCodeDetail ok = new CmmnCodeDetail();
 			ok.setCodeId(USER_STTUS_CODE);
-			ok.setCodeValue("01");
+			ok.setCodeValue(Code.USER_STTUS_OK);
 			ok.setCodeValueNm("Á¤»ó");
 			
 			CmmnCodeDetail x = new CmmnCodeDetail();
 			x.setCodeId(USER_STTUS_CODE);
-			x.setCodeValue("99");
+			x.setCodeValue(Code.USER_STTUS_RESIGN);
 			x.setCodeValueNm("Å»Åð");
 			
 			ccdRepo.save(ok);

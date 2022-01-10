@@ -18,7 +18,7 @@ import lombok.Getter;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseTime {
 	@Column(name = "use_yn")
-	@ColumnDefault("'Y'")//TODO: ¾È¸Ô´Âµ¥..?
+	@ColumnDefault("'Y'")
 	private String useYn;
 	
 	@CreatedDate
