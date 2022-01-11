@@ -1,5 +1,7 @@
 package com.example.demo.api.restcontroller.v1;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,7 @@ import com.example.demo.model.entity.User;
 import com.example.demo.model.repo.UserRepo;
 
 @RestController
+@Transactional
 @RequestMapping("/api/v1/auth")
 public class AuthSampleRestController {
 	@Autowired AuthSampleService asService;

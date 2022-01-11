@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import java.time.Duration;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,5 +43,10 @@ public class WebConfig implements WebMvcConfigurer{
 		builder.setConnectTimeout(Duration.ofMillis(10000));
 		builder.setReadTimeout(Duration.ofMillis(10000));
 		return builder.build();
+	}
+	
+	@Bean
+	public ModelMapper myModelMapper() {
+		return new ModelMapper();
 	}
 }

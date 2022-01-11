@@ -1,30 +1,40 @@
 package com.example.demo.model.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 //@Builder
+@ToString
+@Entity
 @Getter
 @Setter
-@Entity
 @Table(name = "tb_user")
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
@@ -46,11 +56,22 @@ public class User extends Base implements UserDetails {
 	@Column(name = "user_pw")
 	private String userPw;
 	
-	@Column(name = "user_sttus_code")
-	private String userSttusCode;
+	@OneToOne
+	@JoinColumn(name = "user_sttus_code")
+	private CmmnCodeDetail userSttusCode;
 	
-	@Column(name = "user_ty_code")
-	private String userTyCode;
+	@OneToOne
+	@JoinColumn(name = "user_ty_code")
+	private CmmnCodeDetail userTyCode;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "userSn", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<UserRole> userRoles = new ArrayList<>();
+	
+	public void addRoles(UserRole userRole) {
+		this.userRoles.add(userRole);
+		userRole.setUserSn(this);
+	}
 
 	//USER Detail Impl ----------------
 	@Transient
@@ -91,3 +112,18 @@ public class User extends Base implements UserDetails {
 		return true;
 	}
 }
+
+
+//	@OneToOne
+//	@JoinColumns({
+//		@JoinColumn(name = "code_id", referencedColumnName = "code_id"),
+//		@JoinColumn(name = "code_value", referencedColumnName = "code_value")
+//	})
+//	private CmmnCodeDetail userSttusCode;
+	
+//	@OneToOne
+//	@JoinColumns({
+//		@JoinColumn(name = "code_id", referencedColumnName = "code_id"),
+//		@JoinColumn(name = "code_value", referencedColumnName = "code_value")
+//	})
+//	private CmmnCodeDetail userTyCode;
