@@ -27,19 +27,19 @@ public class AuthService {
 	@Autowired private EntityUtil eu;
 	@Autowired private ModelMapper mm;
 	
-	//°¡ÀÔ
+	//ì‚¬ìš©ì ê°€ì…
 	public RVO<User> userJoin(UserJoinDto dto) {
 		return joinCmmn(dto, Code.USER_TY_USR);
 	}
 	
-	//°ü¸®ÀÚ °¡ÀÔ
+	//ê´€ë¦¬ì ê°€ì…
 	public RVO<User> mngJoin(UserJoinDto dto) {
 		return joinCmmn(dto, Code.USER_TY_MNG);
 	}
 	
 	private RVO<User> joinCmmn(UserJoinDto dto, String codeValue) {
 		if(dto.getUserId() != null 
-				&& userRepo.findByUserId(dto.getUserId()) != null) throw new RuntimeException("ÀÌ¹Ì Á¸ÀçÇÏ´Â À¯Àú ÀÔ´Ï´Ù.");
+				&& userRepo.findByUserId(dto.getUserId()) != null) throw new RuntimeException("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ìœ ì € ì…ë‹ˆë‹¤.");
 		User user = mm.map(dto, User.class);
 		user.setUserPw(pe.encode(user.getPassword()));
 		user.setUserSttusCode(eu.getUserSttusCmm(Code.USER_STTUS_OK));
@@ -50,7 +50,7 @@ public class AuthService {
 		user.addRoles(uRole);
 		userRepo.save(user);
 		log.debug("saveUsers: {}", user);
-		return RVO.<User>builder().msg("°¡ÀÔµÇ¾ú½À´Ï´Ù.").data(user).code(ApiCode.NORMAL).build();
+		return RVO.<User>builder().msg("ê°€ì…ì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤.").data(user).code(ApiCode.NORMAL).build();
 	}
 	
 	//LOGIN
@@ -58,17 +58,17 @@ public class AuthService {
 		User user = userRepo.findByUserId(userId);
 		if(user != null) {
 			if(pe.matches(userPw, user.getPassword())) {
-				if(!userIsValid(user)) throw new RuntimeException("À¯Àú »óÅÂ°¡ Á¤»óÀÌ ¾Æ´Õ´Ï´Ù.");
+				if(!userIsValid(user)) throw new RuntimeException("ìœ ì €ìƒíƒœê°€ ì´ìƒí•©ë‹ˆë‹¤.");
 				return RVO.<String>builder()
-						.msg("jwt ÅäÅ«ÀÌ ¹ß±ŞµÇ¾ú½À´Ï´Ù.")
+						.msg("jwt ë°œê¸‰!")
 						.code(ApiCode.NORMAL)
 						.data(JwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(String.valueOf(user.getUserSn()), null)))//TODO:ROLE
 						.build();
 			} else {
-				throw new RuntimeException("¿Ã¹Ù¸£Áö ¸øÇÑ ºñ¹Ğ¹øÈ£ ÀÔ´Ï´Ù..");
+				throw new RuntimeException("ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦½ë‹ˆë‹¤.");
 			}
 		} else {
-			throw new RuntimeException("Á¸ÀçÁö ¾Ê´Â À¯Àú ÀÔ´Ï´Ù.");
+			throw new RuntimeException("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ìœ ì € ì…ë‹ˆë‹¤.");
 		}
 	}
 	
@@ -80,19 +80,19 @@ public class AuthService {
 		}
 	}
 	
-	//Å»Åğ
+	//íƒˆí‡´
 	public RVO<User> reSign(){
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
-		if(name == null || Code.ANNONYMOUSE_USER.equals(name)) throw new RuntimeException("Å»Åğ´Â ·Î±×ÀÎÀ» ÇØ¾ß ÇÕ´Ï´Ù.");
+		if(name == null || Code.ANNONYMOUSE_USER.equals(name)) throw new RuntimeException("íƒˆí‡´í•˜ë ¤ë©´ í† í°ì„ ê°€ì§€ê³  ìˆì–´ì•¼ í•©ë‹ˆë‹¤.(ë¡œê·¸ì¸í•„ìš”)");
 		log.debug("name is {}", name);
 		User user = userRepo.findById(Long.parseLong(name)).get();
-		if(user.getUserTyCode().getCodeValue().equals(Code.ROLE_TY_ADM)) throw new RuntimeException("¾îµå¹ÎÀº Å»ÅğÇÒ¼ö ¾ø½À´Ï´Ù.");
-		if(user.getUserSttusCode().getCodeValue().equals(Code.USER_STTUS_RESIGN)) throw new RuntimeException("ÀÌ¹Ì Å»ÅğµÈ È¸¿øÀÔ´Ï´Ù.");
+		if(user.getUserTyCode().getCodeValue().equals(Code.ROLE_TY_ADM)) throw new RuntimeException("ì–´ë“œë¯¼ì€ ì‚­ì œí• ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+		if(user.getUserSttusCode().getCodeValue().equals(Code.USER_STTUS_RESIGN)) throw new RuntimeException("ì´ë¯¸ íƒˆí‡´ëœ ìœ ì € ì…ë‹ˆë‹¤.");
 		user.setUserSttusCode(eu.getUserSttusCmm(Code.USER_STTUS_RESIGN));
 		User reSignUser = userRepo.save(user);
 		return RVO.<User>builder()
 				.code(ApiCode.NORMAL)
-				.msg("Å»ÅğµÇ¾ú½À´Ï´Ù.")
+				.msg("íƒˆí‡´ ë˜ì—ˆìŠµë‹ˆë‹¤.")
 				.data(reSignUser)
 				.build();
 	}

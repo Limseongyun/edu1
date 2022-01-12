@@ -14,18 +14,18 @@ public class MyRestControllerAdvice {
 	public RVO<String> err(Exception ex, HttpServletResponse resp, HttpServletRequest req) {
 		//Object errCode = req.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		//log.debug("{}, {}, {}", req, resp, errCode);
-		//¸¸¾à À¥¿¡¼­ ¿Â°æ¿ì¶ó¸é ErrorController¿¡¼­ ´Ù½Ã ¹Şµµ·ÏÇÏ±âÀ§ÇÏ¿© exceptionÀ» ´Ù½Ã ¹ß»ı½ÃÄÑÁØ´Ù.
+		//ì›¹ì—ì„œ ì ‘ê·¼ì‹œ ì›¹ ErrorControllerë¡œ ë³´ë‚´ì¤€ë‹¤.
 		if(req.getRequestURI().startsWith("/public")) {
-			throw new RuntimeException("¿À·ù¹ß»ı");
+			throw new RuntimeException("ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.");
 		}
 		
 		if(ex instanceof RuntimeException) {
-			//TODO: ÀÍ¼Á¼Çº° response ºÎ¿© °í·Á?
+			//TODO: ï¿½Í¼ï¿½ï¿½Çºï¿½ response ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½?
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		} else {
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 		ex.printStackTrace();
-		return RVO.<String>builder().code(ApiCode.DEFAULT_ERR).msg("¿À·ù°¡ ¹ß»ıÇß ½À´Ï´Ù.").data(ex.getMessage()).build();
+		return RVO.<String>builder().code(ApiCode.DEFAULT_ERR).msg("ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.").data(ex.getMessage()).build();
 	}
 }

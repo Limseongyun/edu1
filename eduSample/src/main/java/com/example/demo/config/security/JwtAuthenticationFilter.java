@@ -36,11 +36,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 				//authentication.setAuthenticated(true);
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			} else {
-				//if(jwt == null) request.setAttribute("unauthorization", "ÀÎÁõÅ° ¾øÀ½");
-				//if(! JwtTokenProvider.validateToken(jwt)) request.setAttribute("unauthorization", "ÀÎÁõÅ° ¸¸·á");
+				//if(jwt == null) request.setAttribute("unauthorization", "ï¿½ï¿½ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½");
+				//if(! JwtTokenProvider.validateToken(jwt)) request.setAttribute("unauthorization", "ï¿½ï¿½ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½");
 			}
 		} catch (Exception e) {
-			log.debug("À¯ÀúÁ¤º¸¸¦ securityContext¿¡ ³Ö´Âµ¥ ½ÇÆĞÇÔ, {}", e.getMessage());
+			log.debug("ì¸ì¦ê³¼ì •ì¤‘ ì˜¤ë¥˜ ë°œìƒ, {}", e.getMessage());
 		}
 		filterChain.doFilter(request, response);
 	}

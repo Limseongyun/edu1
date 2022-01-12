@@ -27,7 +27,7 @@ public class UseThymeleafAop {
 		 * log.debug("annos:{}", e); } */
 		
 		Object proceedReturnValue = proceedingJoinPoint.proceed();
-		//returnValÀÌ stringÀÌ°í ¾î³ëÅ×ÀÌ ÇÏ³ª¶óµµ ÀÖ¾î¾ßÇÔ.
+		//íƒ€ìž„ë¦¬í”„ì‚¬ìš©í•˜ë©´ ë·°ì— ìŠ¤íŠ¸ë§ì„ ë¶™ì—¬ì¤€ë‹¤.
 		if(proceedReturnValue instanceof String && anns.length > 0) {
 			proceedReturnValue = "thymeleaf/" + proceedReturnValue;
 			log.debug("[@UseThymeleaf] view>>{}", proceedReturnValue);

@@ -27,6 +27,6 @@ public class JwtUnAuthenticationEntryPoint implements AuthenticationEntryPoint{
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.setContentType("application/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.print(new Gson().toJson(RVO.builder().msg("ÀÎÁõ¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.").data(msg != null ? msg : authException.getMessage()).code(ApiCode.NOT_AUTH).build()));
+		out.print(new Gson().toJson(RVO.builder().msg("JWT ì¸ì¦ì— ì‹¤íŒ¨ í•˜ì˜€ìŠµë‹ˆë‹¤.").data(msg != null ? msg : authException.getMessage()).code(ApiCode.NOT_AUTH).build()));
 	}
 }

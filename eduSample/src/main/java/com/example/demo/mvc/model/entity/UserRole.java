@@ -39,7 +39,7 @@ public class UserRole{
 	@JoinColumn(name = "role_ty_code")
 	private CmmnCodeDetail roleTyCode;
 	
-	@JsonBackReference// ¹«ÇÑ ÂüÁ¶ ¿À·ù Á÷·ÄÈ­¸¦ ¸·´Â´Ù.
+	@JsonBackReference// Jackson Serial ë¬´í•œì°¸ì¡° ì˜¤ë¥˜ (ì§ë ¬í™” ë§‰ìŒ)
 	@ManyToOne
 	@JoinColumn(name = "user_sn")
 	private User userSn;

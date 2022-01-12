@@ -50,23 +50,23 @@ public class JwtTokenProvider {
 			Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
 			return true;
 		} catch (SignatureException ex) {
-			String err = "À¯È¿ÇÏÁö ¾ÊÀº JWT »çÀÎ ÀÔ´Ï´Ù.";
+			String err = "JWT ì‚¬ì´ë‹ì´ ì˜¤ë¥˜";
 			log.error(err);
 			if(req != null) req.setAttribute("unauthorization", err);
 		} catch (MalformedJwtException ex) {
-			String err = "Àß¸øµÈ JWT ÀÔ´Ï´Ù.";
+			String err = "JWT ì˜ëª»ë¨ MalformedJwtException";
 			log.error(err);
 			if(req != null) req.setAttribute("unauthorization", err);
 		} catch (ExpiredJwtException ex) {
-			String err = "ÅäÅ«ÀÌ ¸¸·áµÇ¾ú½À´Ï´Ù.";
+			String err = "JWT ë§Œë£Œ";
 			log.error(err);
 			if(req != null) req.setAttribute("unauthorization", err);
 		} catch (UnsupportedJwtException ex) {
-			String err = "Áö¿øÇÏÁö ¾Ê´Â JWT ÀÔ´Ï´Ù.";
+			String err = "JWT ì§€ì›í•˜ì§€ ì•ŠëŠ” í˜•ì‹";
 			log.error(err);
 			if(req != null) req.setAttribute("unauthorization", err);
 		} catch (IllegalArgumentException ex) {
-			String err = "JWT ÀÇ claimÀÌ ºñ¾ú½À´Ï´Ù.";
+			String err = "JWT ì˜ëª»ë¨ IllegalArgumentException";
 			log.error(err);
 			if(req != null) req.setAttribute("unauthorization", err);
 		}

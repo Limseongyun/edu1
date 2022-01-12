@@ -8,6 +8,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import com.example.demo.mvc.model.entity.User;
 import com.example.demo.mvc.repos.UserRepo;
 
 public class MyArgumetnResolver implements HandlerMethodArgumentResolver{
@@ -15,7 +16,7 @@ public class MyArgumetnResolver implements HandlerMethodArgumentResolver{
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		if(parameter.getParameterType() == UserRepo.class 
+		if(parameter.getParameterType() == User.class 
 				&& SecurityContextHolder.getContext().getAuthentication() != null) {
 			return true;
 		}

@@ -28,33 +28,32 @@ public class InitializerConfig {
 	@PostConstruct
 	public void postCon() {
 		log.debug("[start]");
-		//¸¸¾à ADMIN ¾ÆÀÌµğ°¡ ¾Æ¹«°Íµµ ¾ø´Ù°í º»´Ù.
+		//ADMIN ì´ ì—†ìœ¼ë©´ ì´ˆê¸°ìƒíƒœë¼ê³  ë³¸ë‹¤.
 		User admin = userRepo.findByUserId("admin");
 		if(admin == null) {
-			log.debug("¾îµå¹Î ¾øÀ½ ÃÊ±â ÄÚµå ÀÔ·Â!");
-			//°øÅëÄÚµå ±ÇÇÑ
+			log.debug("ì´ˆê¸° ë°ì´í„° ì¸ì„œíŠ¸");
+			//ê³µí†µ-ê¶Œí•œì¢…ë¥˜
 			ccdRepo.save(genCmmnCode(Code.CID_ROLE_TY, Code.ROLE_TY_ADM, Code.ROLE_TY_ADM_NM));
 			ccdRepo.save(genCmmnCode(Code.CID_ROLE_TY, Code.ROLE_TY_MNG, Code.ROLE_TY_MNG_NM));
 			ccdRepo.save(genCmmnCode(Code.CID_ROLE_TY, Code.ROLE_TY_USR, Code.ROLE_TY_USR_NM));
 			
-			//°øÅëÄÚµå À¯Àú »óÅÂ
+			//ê³µí†µ-ìœ ì €ìƒíƒœì½”ë“œ
 			ccdRepo.save(genCmmnCode(Code.CID_USER_STTUS, Code.USER_STTUS_OK, Code.USER_STTUS_OK_NM));
 			ccdRepo.save(genCmmnCode(Code.CID_USER_STTUS, Code.USER_STTUS_RESIGN, Code.USER_STTUS_RESIGN_NM));
 			
-			//°øÅëÄÚµå À¯Àú Å¸ÀÔ
+			//ê³µí†µ-ìœ ì €íƒ€ì…
 			ccdRepo.save(genCmmnCode(Code.CID_USER_TY, Code.USER_TY_MNG, Code.USER_TY_MNG_NM));
 			ccdRepo.save(genCmmnCode(Code.CID_USER_TY, Code.USER_TY_USR, Code.USER_TY_USR_NM));
 			
 			
 			User adm = new User();
 			adm.setUserId("admin");
-			adm.setUserNm("¾îµå¹Î");
+			adm.setUserNm("ì–´ë“œë¯¼");
 			adm.setUserPw(pe.encode("admin"));
 			adm.setUserTyCode(eu.getUserTyCmm(Code.USER_TY_MNG));
 			adm.setUserSttusCode(eu.getUserSttusCmm(Code.USER_STTUS_OK));
 			User admInfo = userRepo.save(adm);
 			log.debug("saved is {}", admInfo);
-			//¾îµå¹Î À¯Àú ±ÇÇÑ »ı¼º
 			
 			UserRole admRole = new UserRole();
 			admRole.setRoleTyCode(eu.getRoleTyCmm(Code.ROLE_TY_ADM));

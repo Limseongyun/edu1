@@ -64,7 +64,7 @@ public class User extends Base implements UserDetails {
 	@JoinColumn(name = "user_ty_code")
 	private CmmnCodeDetail userTyCode;
 	
-	@JsonManagedReference// ¹«ÇÑ ÂüÁ¶ ¿À·ù Á÷·ÄÈ­¸¦ Á¤»óÀûÀ» ÁøÇàÇÑ´Ù.
+	@JsonManagedReference// Jackson Serializeì‹œ ë¬´í•œ ì°¸ì¡° ì˜¤ë¥˜(Serial ì •ìƒì§„í–‰)
 	@OneToMany(mappedBy = "userSn", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UserRole> userRoles = new ArrayList<>();
 	

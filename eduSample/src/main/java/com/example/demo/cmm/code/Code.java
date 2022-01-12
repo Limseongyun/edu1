@@ -3,24 +3,24 @@ package com.example.demo.cmm.code;
 public interface Code {
 	String ANNONYMOUSE_USER = "anonymousUser";
 	
-	//°øÅëÄÚµå codeid¸í
+	//ê³µí†µì½”ë“œ codeId
 	String CID_USER_STTUS = "user_sttus_code";
 	String CID_USER_TY = "user_ty_code";
 	String CID_ROLE_TY = "role_ty_code";
 	
-	//À¯Àú Å¸ÀÔ
+	//ìœ ì €íƒ€ì…
 	String USER_TY_MNG = "01";
-	String USER_TY_MNG_NM = "°ü¸®ÀÚ";
+	String USER_TY_MNG_NM = "ê´€ë¦¬ì";
 	String USER_TY_USR = "02";
-	String USER_TY_USR_NM = "»ç¿ëÀÚ";
+	String USER_TY_USR_NM = "ì‚¬ìš©ì";
 	
-	//À¯Àú»óÅÂ
+	//ìœ ì €ìƒíƒœ
 	String USER_STTUS_OK = "01";
-	String USER_STTUS_OK_NM = "Á¤»ó";
+	String USER_STTUS_OK_NM = "ì •ìƒ";
 	String USER_STTUS_RESIGN = "99";
-	String USER_STTUS_RESIGN_NM = "Å»Åğ";
+	String USER_STTUS_RESIGN_NM = "íƒˆí‡´";
 	
-	//±ÇÇÑ Á¾·ù
+	//ê¶Œí•œ ì¢…ë¥˜
 	String ROLE_TY_ADM = "01";
 	String ROLE_TY_ADM_NM = "ROLE_ADM";
 	String ROLE_TY_MNG = "02";

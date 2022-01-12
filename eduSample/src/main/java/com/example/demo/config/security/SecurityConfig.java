@@ -36,9 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.authenticationEntryPoint(unauthorizaedHadle)
 				.and()
 			.authorizeRequests()
-				.antMatchers("/swagger-ui/**", "/v3/api-docs/**",//Swagger Çã¿ë
-							 "/api/*/auth/**", //auth·Î ½ÃÀÛÇÏ¸í Çã¿ë
-							 "/public/**", "/favicon*", "/api/*/test/**").permitAll() //public À¸·Î ½ÃÀÛÇÏ¸é Çã¿ë, È­¸é´Ü
+				.antMatchers("/swagger-ui/**", "/v3/api-docs/**",//Swagger í—ˆìš©
+							 "/api/*/auth/**", //auth í—ˆìš©
+							 "/public/**", "/favicon*", "/api/*/test/**").permitAll() //public, test í—ˆìš©
 				.antMatchers("/**").authenticated()
 				.and()
 			.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
