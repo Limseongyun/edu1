@@ -8,11 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.mvc.repos.UserRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class MyUserDetailService implements UserDetailsService {
 	@Autowired UserRepo userRepo;
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return userRepo.getById(Long.parseLong(username));
+		log.debug("loadByUsername: {}");
+		return userRepo.findByUserId(username);
 	}
 }

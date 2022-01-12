@@ -40,11 +40,6 @@ public class SampleController {
 		return "test/hah2a";
 	}
 	
-	@RequestMapping("/login")
-	public String login() {
-		return "pages/loginPage";
-	}
-	
 	@RequestMapping("/register")
 	public String register() {
 		return "pages/registerPage";
