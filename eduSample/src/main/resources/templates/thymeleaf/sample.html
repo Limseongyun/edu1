@@ -5,6 +5,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-thymeleaf sample
+thymeleaf sample [[${sample}]]
+<div th:each="sp : ${sample}">
+	<span th:text="${sp.userNm}"></span>
+</div>
 </body>
 </html>
