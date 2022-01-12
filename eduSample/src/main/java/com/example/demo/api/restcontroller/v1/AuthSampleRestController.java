@@ -34,7 +34,7 @@ public class AuthSampleRestController {
 	
 	@PostMapping("/mngJoin")
 	public RVO<User> mngJoin(@RequestBody UserJoinDto dto) {
-		return asService.userJoin(dto);
+		return asService.mngJoin(dto);
 	}
 	
 	@PostMapping("/reSign")

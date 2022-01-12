@@ -22,9 +22,9 @@ public interface Code {
 	
 	//권한 종류
 	String ROLE_TY_ADM = "01";
-	String ROLE_TY_ADM_NM = "어드민";
+	String ROLE_TY_ADM_NM = "ROLE_ADM";
 	String ROLE_TY_MNG = "02";
-	String ROLE_TY_MNG_NM = "관리자";
+	String ROLE_TY_MNG_NM = "ROLE_MNG";
 	String ROLE_TY_USR = "03";
-	String ROLE_TY_USR_NM = "사용자";
+	String ROLE_TY_USR_NM = "ROLE_USR";
 }
