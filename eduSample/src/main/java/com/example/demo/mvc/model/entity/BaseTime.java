@@ -17,7 +17,7 @@ import lombok.Getter;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseTime {
-	@Column(name = "use_yn")
+	@Column(name = "use_yn", length = 1)
 	@ColumnDefault("'Y'")
 	private String useYn;
 	
