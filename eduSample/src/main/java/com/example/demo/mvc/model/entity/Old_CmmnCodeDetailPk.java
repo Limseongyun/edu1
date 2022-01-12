@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 //@Embeddable
+@SuppressWarnings("unused")
 @Getter
 @Setter
 @AllArgsConstructor

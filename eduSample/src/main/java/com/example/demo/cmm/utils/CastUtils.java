@@ -23,6 +23,7 @@ public class CastUtils {
 		return Integer.parseInt(String.valueOf(val));
 	}
 
+	@SuppressWarnings("deprecation")
 	public static final Long castLong(Object val, Long intVal) {
 		if(val == null || val == "") return intVal;
 		if(val instanceof Long || val instanceof Double) {
@@ -34,6 +35,7 @@ public class CastUtils {
 		return Long.parseLong(String.valueOf(val));
 	}
 
+	@SuppressWarnings("deprecation")
 	public static final Double castDouble(Object val, Double intVal) {
 		if(val == null) return intVal;
 		if(val instanceof Long || val instanceof Double) {

@@ -32,7 +32,6 @@ public class SampleController {
 	
 	@RequestMapping("/sample2")
 	public String smaple2() {
-		int a = 1/0;
 		return "test/haha";
 	}
 	
