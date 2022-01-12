@@ -3,11 +3,19 @@ package com.example.demo.mvc.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.cmm.annotations.UseThymeleaf;
 @Controller
 public class SampleController {
-	@GetMapping("/th1")
+	@GetMapping("/public/th1")
+	@UseThymeleaf
 	public String asdfsadf() {
 		return "sample";
+	}
+	
+	@GetMapping("/public/jsp")
+	public String jsp() {
+		return "test/haha";
 	}
 	
 	@GetMapping("/public/sample1")
