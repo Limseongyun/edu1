@@ -2,6 +2,9 @@ package com.example.demo.config;
 
 import java.time.Duration;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +16,12 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
+	@PersistenceContext private EntityManager em;
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/files/**").addResourceLocations("classpath:/static/");
@@ -49,4 +56,11 @@ public class WebConfig implements WebMvcConfigurer{
 	public ModelMapper myModelMapper() {
 		return new ModelMapper();
 	}
+	
+	@Bean
+	public JPAQueryFactory jpaQueryFactory() {
+		return new JPAQueryFactory(em);
+	}
+	
+	
 }

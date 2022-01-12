@@ -18,6 +18,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,7 +37,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@Table(name = "tb_user")
+@Table(name = "tb_user", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "user_ty_code"}))
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 @SequenceGenerator(initialValue = 1, allocationSize = 1, name = "tb_user_seq", sequenceName = "tb_user_seq")
@@ -50,7 +52,7 @@ public class User extends Base implements UserDetails {
 	@Column(name = "user_nm")
 	private String userNm;
 	
-	@Column(name = "user_id", unique = true)
+	@Column(name = "user_id")
 	private String userId;
 	
 	@Column(name = "user_pw")

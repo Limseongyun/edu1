@@ -1,45 +1,53 @@
 package com.example.demo.mvc.service;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.cmm.code.ApiCode;
 import com.example.demo.cmm.code.Code;
 import com.example.demo.cmm.utils.EntityUtil;
-import com.example.demo.cmm.utils.RVO;
 import com.example.demo.config.security.JwtTokenProvider;
 import com.example.demo.mvc.model.dto.UserJoinDto;
+import com.example.demo.mvc.model.entity.QUser;
 import com.example.demo.mvc.model.entity.User;
 import com.example.demo.mvc.model.entity.UserRole;
 import com.example.demo.mvc.repos.UserRepo;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AuthService {
-	@Autowired private UserRepo userRepo;
-	@Autowired private PasswordEncoder pe;
-	@Autowired private EntityUtil eu;
-	@Autowired private ModelMapper mm;
+	private final UserRepo userRepo;
+	private final PasswordEncoder pe;
+	private final EntityUtil eu;
+	private final ModelMapper mm;
+	private final JPAQueryFactory qf;
 	
 	//사용자 가입
-	public RVO<User> userJoin(UserJoinDto dto) {
+	public User userJoin(UserJoinDto dto) {
 		return joinCmmn(dto, Code.USER_TY_USR);
 	}
 	
 	//관리자 가입
-	public RVO<User> mngJoin(UserJoinDto dto) {
+	public User mngJoin(UserJoinDto dto) {
 		return joinCmmn(dto, Code.USER_TY_MNG);
 	}
 	
-	private RVO<User> joinCmmn(UserJoinDto dto, String codeValue) {
-		if(dto.getUserId() != null 
-				&& userRepo.findByUserId(dto.getUserId()) != null) throw new RuntimeException("이미 존재하는 유저 입니다.");
+	private User joinCmmn(UserJoinDto dto, String codeValue) {
+		QUser quser = QUser.user;
+		Integer userCnt = qf.select(quser)
+							.from(quser)
+							.where(quser.userTyCode.eq(codeValue.equals(Code.USER_TY_MNG) ? eu.getUserTyCmm(Code.USER_TY_MNG) : eu.getUserTyCmm(Code.USER_TY_USR))
+								.and(quser.userId.eq(dto.getUserId())))
+							.fetch().size();
+		
+		if(userCnt > 0) throw new RuntimeException("이미 존재하는 유저 입니다.");
 		User user = mm.map(dto, User.class);
 		user.setUserPw(pe.encode(user.getPassword()));
 		user.setUserSttusCode(eu.getUserSttusCmm(Code.USER_STTUS_OK));
@@ -50,20 +58,21 @@ public class AuthService {
 		user.addRoles(uRole);
 		userRepo.save(user);
 		log.debug("saveUsers: {}", user);
-		return RVO.<User>builder().msg("가입에 성공하였습니다.").data(user).code(ApiCode.NORMAL).build();
+		return user;
 	}
 	
 	//LOGIN
-	public RVO<String> getToken(String userId, String userPw) {
-		User user = userRepo.findByUserId(userId);
+	public String getToken(String userId, String userPw, Boolean isMngLogin) {
+		QUser quser = QUser.user;
+		User user = qf.select(quser)
+							.from(quser)
+							.where(quser.userTyCode.eq(isMngLogin != null && isMngLogin ? eu.getUserTyCmm(Code.USER_TY_MNG) : eu.getUserTyCmm(Code.USER_TY_USR))
+								.and(quser.userId.eq(userId)))
+							.fetchOne();
 		if(user != null) {
 			if(pe.matches(userPw, user.getPassword())) {
 				if(!userIsValid(user)) throw new RuntimeException("유저상태가 이상합니다.");
-				return RVO.<String>builder()
-						.msg("jwt 발급!")
-						.code(ApiCode.NORMAL)
-						.data(JwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(String.valueOf(user.getUserSn()), null)))//TODO:ROLE
-						.build();
+				return JwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(String.valueOf(user.getUserSn()), null));
 			} else {
 				throw new RuntimeException("비밀번호가 틀립니다.");
 			}
@@ -81,7 +90,7 @@ public class AuthService {
 	}
 	
 	//탈퇴
-	public RVO<User> reSign(){
+	public User reSign(){
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		if(name == null || Code.ANNONYMOUSE_USER.equals(name)) throw new RuntimeException("탈퇴하려면 토큰을 가지고 있어야 합니다.(로그인필요)");
 		log.debug("name is {}", name);
@@ -90,10 +99,6 @@ public class AuthService {
 		if(user.getUserSttusCode().getCodeValue().equals(Code.USER_STTUS_RESIGN)) throw new RuntimeException("이미 탈퇴된 유저 입니다.");
 		user.setUserSttusCode(eu.getUserSttusCmm(Code.USER_STTUS_RESIGN));
 		User reSignUser = userRepo.save(user);
-		return RVO.<User>builder()
-				.code(ApiCode.NORMAL)
-				.msg("탈퇴 되었습니다.")
-				.data(reSignUser)
-				.build();
+		return reSignUser;
 	}
 }
