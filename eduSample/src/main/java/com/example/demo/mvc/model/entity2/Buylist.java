@@ -37,7 +37,7 @@ public class Buylist extends Base{
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "usr_no")
-	private Member usrNo;
+	private Member buyer;
 	
 	//상품번호
 	@Id

@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BuylistPK implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private Member usrNo;
+	private Member buyer;
 	private Goods gdsNo;
 }

@@ -101,6 +101,19 @@ public class Member extends Base{
 	private String visitHost;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "usrNo", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "selrUsrNo", cascade = CascadeType.ALL)
+	private List<Goods> goodsList = new ArrayList<Goods>();
+	
+	public void addGoodList(Goods g) {
+		this.goodsList.add(g);
+		g.setSelrUsrNo(this);
+	}
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
 	private List<Buylist> buylists = new ArrayList<Buylist>();
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "asser", cascade = CascadeType.ALL)
+	private List<Gdsases> gdsaseslists = new ArrayList<Gdsases>();
 }

@@ -1,7 +1,10 @@
 package com.example.demo.mvc.model.entity2;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -11,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,6 +24,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.example.demo.mvc.model.entity.Base;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -51,8 +56,11 @@ public class Goods extends Base{
 	private Catg catgNo;
 	
 	//판매자 고유 번호
-	@Column(name = "selr_usr_no", length = 8, nullable = false)
-	private String selrUsrNo;
+	//@Column(name = "selr_usr_no", length = 8, nullable = false)
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "selr_usr_no")
+	private Member selrUsrNo;
 	
 	//상품일련번호
 	@Column(name = "gds_sno", length = 7, nullable = false)
@@ -101,4 +109,12 @@ public class Goods extends Base{
 	//판매중지일자
 	@Column(name = "buy_cncl_dt", length = 8)
 	private String buyCnclDt;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "gdsNo", cascade = CascadeType.ALL)
+	private List<Buylist> buylists = new ArrayList<Buylist>();
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "goods", cascade = CascadeType.ALL)
+	private List<Gdsases> aseslists = new ArrayList<Gdsases>();
 }

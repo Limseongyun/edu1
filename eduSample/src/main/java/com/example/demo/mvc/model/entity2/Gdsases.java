@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -29,15 +31,28 @@ import lombok.Setter;
 @IdClass(GdsasesPK.class)
 @Entity
 public class Gdsases extends Base{
-	//상품번호
-	@Id
-	@Column(name = "gds_no")
-	private String gdsNo;
 	
-	//상품평일련번호
+	//@Column(name = "usr_no")
 	@Id
-	@Column(name = "gds_eval_sno")
-	private Long gdsEvalSno;
+	@ManyToOne
+	@JoinColumn(name = "usr_no")
+	private Member asser;
+	
+	//@Column(name = "gds_no")
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "gds_no")
+	private Goods goods;
+	
+	//상품번호
+//	@Id
+//	@Column(name = "gds_no")
+//	private String gdsNo;
+//	
+//	//상품평일련번호
+//	@Id
+//	@Column(name = "gds_eval_sno")
+//	private Long gdsEvalSno;
 	
 	//상품평단계
 	@Column(name = "gds_eval_lev", length = 1, nullable = false)

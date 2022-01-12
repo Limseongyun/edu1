@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GdsasesPK implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private String gdsNo;
-	private Long gdsEvalSno;
+	private Member asser;
+	private Goods goods;
 }
