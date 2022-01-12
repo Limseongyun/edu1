@@ -4,14 +4,16 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.example.demo.config.code.Code;
-import com.example.demo.model.entity.CmmnCodeDetail;
-import com.example.demo.model.entity.User;
-import com.example.demo.model.entity.UserRole;
-import com.example.demo.model.repo.CmmnCodeDetailRepo;
-import com.example.demo.model.repo.UserRepo;
-import com.example.demo.model.repo.UserRoleRepo;
-import com.example.demo.utils.EntityUtil;
+
+import com.example.demo.cmm.code.Code;
+import com.example.demo.cmm.utils.EntityUtil;
+import com.example.demo.mvc.model.entity.CmmnCodeDetail;
+import com.example.demo.mvc.model.entity.User;
+import com.example.demo.mvc.model.entity.UserRole;
+import com.example.demo.mvc.repos.CmmnCodeDetailRepo;
+import com.example.demo.mvc.repos.UserRepo;
+import com.example.demo.mvc.repos.UserRoleRepo;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Configuration

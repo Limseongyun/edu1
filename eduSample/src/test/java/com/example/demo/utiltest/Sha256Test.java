@@ -4,7 +4,7 @@ import java.security.NoSuchAlgorithmException;
 
 import org.junit.jupiter.api.Test;
 
-import com.example.demo.utils.Sha256Util;
+import com.example.demo.cmm.utils.Sha256Util;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j

@@ -10,8 +10,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.config.RVO;
-import com.example.demo.config.code.ApiCode;
+import com.example.demo.cmm.code.ApiCode;
+import com.example.demo.cmm.utils.RVO;
 import com.google.gson.Gson;
 
 import lombok.extern.slf4j.Slf4j;

@@ -8,7 +8,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.example.demo.model.repo.UserRepo;
+import com.example.demo.mvc.repos.UserRepo;
 
 public class MyArgumetnResolver implements HandlerMethodArgumentResolver{
 	@Autowired UserRepo userRepo;

@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.example.demo.config.RVO;
-import com.example.demo.config.code.ApiCode;
+import com.example.demo.cmm.code.ApiCode;
+import com.example.demo.cmm.utils.RVO;
 
 @RestControllerAdvice
 public class MyRestControllerAdvice {
