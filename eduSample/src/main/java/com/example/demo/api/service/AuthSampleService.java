@@ -14,7 +14,6 @@ import com.example.demo.model.dto.UserJoinDto;
 import com.example.demo.model.entity.User;
 import com.example.demo.model.entity.UserRole;
 import com.example.demo.model.repo.UserRepo;
-import com.example.demo.model.repo.UserRoleRepo;
 import com.example.demo.utils.EntityUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AuthSampleService {
 	@Autowired private UserRepo userRepo;
-	@Autowired private UserRoleRepo userRoleRepo;
 	@Autowired private PasswordEncoder pe;
 	@Autowired private EntityUtil eu;
 	@Autowired private ModelMapper mm;
@@ -49,14 +47,8 @@ public class AuthSampleService {
 		if(codeValue.equals(Code.USER_TY_USR)) uRole.setRoleTyCode(eu.getRoleTyCmm(Code.ROLE_TY_USR));
 		user.addRoles(uRole);
 		userRepo.save(user);
-		;
 		log.debug("saveUsers: {}", user);
 		return RVO.<User>builder().msg("°¡ÀÔµÇ¾ú½À´Ï´Ù.").data(user).code(ApiCode.NORMAL).build();
-	}
-	
-	//Å»Åð
-	public void userResign() {
-		
 	}
 	
 	//LOGIN
@@ -86,6 +78,7 @@ public class AuthSampleService {
 		}
 	}
 	
+	//Å»Åð
 	public RVO<User> reSign(){
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		if(name == null || Code.ANNONYMOUSE_USER.equals(name)) throw new RuntimeException("Å»Åð´Â ·Î±×ÀÎÀ» ÇØ¾ß ÇÕ´Ï´Ù.");

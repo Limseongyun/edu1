@@ -64,8 +64,8 @@ public class User extends Base implements UserDetails {
 	@JoinColumn(name = "user_ty_code")
 	private CmmnCodeDetail userTyCode;
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "userSn", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonManagedReference// 무한 참조 오류 직렬화를 정상적을 진행한다.
+	@OneToMany(mappedBy = "userSn", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UserRole> userRoles = new ArrayList<>();
 	
 	public void addRoles(UserRole userRole) {

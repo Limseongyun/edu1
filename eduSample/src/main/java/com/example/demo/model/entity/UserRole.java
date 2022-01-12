@@ -39,8 +39,8 @@ public class UserRole{
 	@JoinColumn(name = "role_ty_code")
 	private CmmnCodeDetail roleTyCode;
 	
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference// 무한 참조 오류 직렬화를 막는다.
+	@ManyToOne
 	@JoinColumn(name = "user_sn")
 	private User userSn;
 }
