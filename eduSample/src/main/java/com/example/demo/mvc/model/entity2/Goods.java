@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,6 +19,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.example.demo.mvc.model.entity.Base;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,8 +44,11 @@ public class Goods extends Base{
 	private Long gdsNo;
 	
 	//카테고리번호
-	@Column(name = "catg_no", length = 2, nullable = false)
-	private String catgNo;
+	//@Column(name = "catg_no", length = 2, nullable = false)
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "catg_no")
+	private Catg catgNo;
 	
 	//판매자 고유 번호
 	@Column(name = "selr_usr_no", length = 8, nullable = false)
