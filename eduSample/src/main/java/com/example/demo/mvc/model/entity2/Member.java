@@ -1,7 +1,10 @@
 package com.example.demo.mvc.model.entity2;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -9,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +23,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.example.demo.mvc.model.entity.Base;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -94,4 +99,8 @@ public class Member extends Base{
 	//최근접속 호스트
 	@Column(name = "visit_host", length = 15)
 	private String visitHost;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "usrNo", cascade = CascadeType.ALL)
+	private List<Buylist> buylists = new ArrayList<Buylist>();
 }

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -12,6 +14,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.example.demo.mvc.model.entity.Base;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,13 +34,17 @@ import lombok.Setter;
 public class Buylist extends Base{
 	//회원고유번호
 	@Id
-	@Column(name = "usr_no")
-	private String usrNo;
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "usr_no")
+	private Member usrNo;
 	
 	//상품번호
 	@Id
-	@Column(name = "gds_no")
-	private String gdsNo;
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "gds_no")
+	private Goods gdsNo;
 	
 	//구매일자
 	@Column(name = "buy_dt", length = 8)
