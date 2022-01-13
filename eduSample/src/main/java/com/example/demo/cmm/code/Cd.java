@@ -1,0 +1,24 @@
+package com.example.demo.cmm.code;
+/*공통코드 관련*/
+public interface Cd {
+	String CODE_ID_MEMBER_TY = "MEMBER_TY_CODE";
+	String CODE_ID_MEMBER_STTUS = "MEMBER_STTUS_CODE";
+	String CODE_ID_MONEY_TSF_TY_CODE = "MONEY_TSF_CODE";
+	String CODE_ID_MONEY_MEAN_CODE = "MONEY_MEAN_CODE";
+	
+	String MEMBER_TY_ADMIN = "ROLE_ADMIN";
+	String MEMBER_TY_SELLER = "ROLE_SELLER";
+	String MEMBER_TY_USER = "ROLE_USER";
+	
+	String MEMBER_STTUS_OK = "01";
+	String MEMBER_STTUS_DORMACY = "02";
+	String MEMBER_STTUS_RESIGN = "99";
+	
+	String MONEY_TSF_TY_CHARGE = "01";
+	String MONEY_TSF_TY_USE = "02";
+	String MONEY_TSF_TY_EXCHANGE = "03";
+	
+	String MONEY_MEAN_CARD = "01";
+	String MONEY_MEAN_ACNT = "02";
+	String MONEY_MEAN_MONEY = "03";
+}
