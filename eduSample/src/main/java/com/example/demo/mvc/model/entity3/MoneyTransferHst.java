@@ -16,6 +16,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.example.demo.mvc.model.entity.Base;
 import com.example.demo.mvc.model.entity.CmmnCodeDetail;
 
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ import lombok.Setter;
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
 //@Entity
-public class MoneyTransferHst {
+public class MoneyTransferHst extends Base{
 	@Id@GeneratedValue(generator = "money_tsf_hst_seq", strategy = GenerationType.SEQUENCE)@Column(name = "money_transfer_hst_sn")
 	private Long moneyTransferHstSn;
 	
