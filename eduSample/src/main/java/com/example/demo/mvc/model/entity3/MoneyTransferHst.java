@@ -39,8 +39,8 @@ public class MoneyTransferHst extends Base{
 	private Long moneyTransferHstSn;
 	
 	@ManyToOne
-	@JoinColumn(name = "member_no")
-	private Member memberNo;
+	@JoinColumn(name = "member_sn")
+	private Member memberSn;
 	
 	@OneToOne
 	@JoinColumn(name = "transfer_ty_cd")

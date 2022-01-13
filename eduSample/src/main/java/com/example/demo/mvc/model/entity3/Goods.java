@@ -26,7 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "tb_goods", indexes = @Index(columnList = "goods_no"))
+@Table(name = "tb_goods", indexes = @Index(columnList = "goods_sn"))
 //@SequenceGenerator(name = "goods_seq", allocationSize = 1, initialValue = 1, sequenceName = "goods_seq")
 @DynamicInsert
 @DynamicUpdate
@@ -36,8 +36,8 @@ public class Goods extends Base{
 	//상품번호
 	@Id
 	//@GeneratedValue(generator = "goods_seq", strategy = GenerationType.SEQUENCE)
-	@Column(name = "goods_no", length = 15)
-	private String goodsNo;
+	@Column(name = "goods_sn", length = 15)
+	private String goodsSn;
 	
 	//가맹점 정보
 	@ManyToOne@JsonBackReference

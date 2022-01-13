@@ -37,7 +37,7 @@ import lombok.Setter;
 //@Entity
 public class Member extends Base{
 	//회원번호
-	@Id@Column(name = "memb_no")@GeneratedValue(generator = "membe_seq", strategy = GenerationType.SEQUENCE)
+	@Id@Column(name = "memb_no")@GeneratedValue(generator = "member_seq", strategy = GenerationType.SEQUENCE)
 	private Long memberNo;
 	
 	//회원구분

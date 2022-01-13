@@ -23,15 +23,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "tb_memb_money", indexes = @Index(columnList = "login_no"))
+@Table(name = "tb_memb_money", indexes = @Index(columnList = "memb_sn"))
 //@SequenceGenerator(name = "memLoginHst_seq", allocationSize = 1, initialValue = 1, sequenceName = "memLoginHst_seq")
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
 //@Entity
 public class MemberMoney extends Base{
-	@Id@Column(name = "memb_no")
-	private Member membNo;
+	@Id@Column(name = "memb_sn")
+	private Member membSn;
 	
 	@Column(name = "money_blce", length = 15)
 	@ColumnDefault("0")

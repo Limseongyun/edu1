@@ -21,15 +21,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "tb_merchant", indexes = @Index(columnList = "merchant_no"))
+@Table(name = "tb_merchant", indexes = @Index(columnList = "merchant_sn"))
 @SequenceGenerator(name = "merchant_seq", allocationSize = 1, initialValue = 1, sequenceName = "merchant_seq")
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
 //@Entity
 public class Merchant extends Base{
-	@Id@GeneratedValue(generator = "merchant_seq", strategy = GenerationType.SEQUENCE)@Column(name = "merchant_no")
-	private Long merchantNo;
+	@Id@GeneratedValue(generator = "merchant_seq", strategy = GenerationType.SEQUENCE)@Column(name = "merchant_sn")
+	private Long merchantSn;
 	
 	@Column(name = "merchant_nm", length = 100, nullable = false)
 	private String merchantNm;
