@@ -47,7 +47,8 @@ import lombok.Setter;
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
-@Entity
+//@Entity
+@Deprecated
 public class Member extends Base{
 	//회원고유번호
 	@Id

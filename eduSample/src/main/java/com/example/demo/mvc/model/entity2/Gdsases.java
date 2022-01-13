@@ -29,7 +29,8 @@ import lombok.Setter;
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
 @IdClass(GdsasesPK.class)
-@Entity
+//@Entity
+@Deprecated
 public class Gdsases extends Base{
 	
 	//@Column(name = "usr_no")

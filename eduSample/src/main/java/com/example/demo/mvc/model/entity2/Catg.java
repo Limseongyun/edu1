@@ -37,7 +37,8 @@ import lombok.Setter;
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
-@Entity
+//@Entity
+@Deprecated
 public class Catg extends Base{
 	//카테고리 번호
 	@Id

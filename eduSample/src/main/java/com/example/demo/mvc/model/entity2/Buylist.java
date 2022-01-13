@@ -29,8 +29,9 @@ import lombok.Setter;
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
-@IdClass(BuylistPK.class)
-@Entity
+//@IdClass(BuylistPK.class)
+//@Entity
+@Deprecated
 public class Buylist extends Base{
 	//회원고유번호
 	@Id

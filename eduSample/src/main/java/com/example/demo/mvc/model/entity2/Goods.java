@@ -40,7 +40,8 @@ import lombok.Setter;
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
-@Entity
+//@Entity
+@Deprecated
 public class Goods extends Base{
 	//상품번호
 	@Id
