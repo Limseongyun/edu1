@@ -1,9 +1,14 @@
 package com.example.demo.mvc.model.entity3;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,9 +33,13 @@ import lombok.Setter;
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
-//@Entity
-public class MemberMoney extends Base{
-	@Id@Column(name = "memb_sn")
+@Entity
+public class MemberMoney extends Base implements Serializable{
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "memb_sn")
 	private Member membSn;
 	
 	@Column(name = "money_blce", length = 15)

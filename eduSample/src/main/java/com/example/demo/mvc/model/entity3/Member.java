@@ -3,6 +3,7 @@ package com.example.demo.mvc.model.entity3;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +35,7 @@ import lombok.Setter;
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
-//@Entity
+@Entity
 public class Member extends Base{
 	//회원번호
 	@Id@Column(name = "memb_no")@GeneratedValue(generator = "member_seq", strategy = GenerationType.SEQUENCE)

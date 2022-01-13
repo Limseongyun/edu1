@@ -1,6 +1,7 @@
 package com.example.demo.mvc.model.entity3;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +32,7 @@ import lombok.Setter;
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
-//@Entity
+@Entity
 public class MemberLoginHst {
 	@Id@GeneratedValue(generator = "memLoginHst_seq", strategy = GenerationType.SEQUENCE)@Column(name = "login_no")
 	private Long loginNo;
