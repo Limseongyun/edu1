@@ -1,6 +1,8 @@
 package com.example.demo.cmm.code;
 /*공통코드 관련*/
 public interface Cd {
+	String ANNONYMOUSE_USER = "anonymousUser";
+	
 	String CODE_ID_MEMBER_TY = "MEMBER_TY_CODE";
 	String CODE_ID_MEMBER_STTUS = "MEMBER_STTUS_CODE";
 	String CODE_ID_MONEY_TSF_TY_CODE = "MONEY_TSF_CODE";

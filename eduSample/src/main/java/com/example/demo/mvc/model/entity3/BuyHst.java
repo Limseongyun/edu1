@@ -14,6 +14,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.example.demo.mvc.model.entity.Base;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +32,7 @@ import lombok.Setter;
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-public class BuyHst {
+public class BuyHst extends Base{
 	@Id@GeneratedValue(generator = "buy_hst_seq", strategy = GenerationType.SEQUENCE)@Column(name = "buy_hst_sn")
 	private Long buyHstSn;
 	
